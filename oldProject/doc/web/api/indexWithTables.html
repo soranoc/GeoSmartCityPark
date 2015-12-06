@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> API Documentation </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style/style.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1>API Documentation</h1>      
+			</div>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th width="10%">Request</th>
+						<th width="20%">Description</th>
+						<th width="30%">Parameters</th>
+						<th width="30%">Return format</th>
+						<th width="0%">Return example</th>
+					</tr>
+					<tr id="bloc1">
+						<td>GET api/api.php?request=parking/zone/{minLat}/{minLng}/{maxLat}/{maxLng} </td>
+						<td>Returns a list of all the parkings in the requested area </td>
+						<td>
+							<ul>
+								<li> <span class="important">MinLat : </span>latitude of the upper-left corner of the zone </li>
+								<li> <span class="important">MinLng : </span>longitude of the upper-left corner of the zone </li>
+								<li> <span class="important">MaxLat : </span>latitude of the bottom-right corner of the zone </li>
+								<li> <span class="important">MaxLng : </span>longitude of the bottom-right corner of the zone </li>
+							</ul>
+						</td>
+						<td>
+							[{latitude, longitude, name, slots, payment, id}, 
+							{{latitude, longitude, name, slots, payment, id}, ...] <br /><br />
+							<ul>
+								<li> <span class="important"> latitude, longitude :</span> position of the parking </li>
+								<li> <span class="important">name : </span>name of the parking </li>
+								<li> <span class="important">slots : </span>capacity of the parking </li>
+								<li> <span class="important">payment : </span>payment requirements of the parking </li>
+								<li> <span class="important"> id : </span>id of the parking, useful to retrieve additional informations </li>
+							</ul>
+						</td>
+						<td>
+							[{"latitude":"60.4459585","longitude":"22.2473144", <br />
+							"name":"Parking #7", "slots":"-1","payment":"Free of charge","id":"7"},<br />
+							{"latitude":"60.4457044","longitude":"22.2443103",<br />
+							"name":"Parking #11","slots":"-1", <br />
+							"payment":"Subject to a fee","id":"11"}] 
+						</td>
+					</tr>
+					<tr id="bloc2">
+						<td>GET api/api.php?request=parking/id/{id} </td>
+						<td>Returns an exhaustive set of informations about requested parking </td>
+						<td>
+							<ul> <li> Id : id of the parking, as retrieved by a zone request </li> </ul>
+						</td>
+						<td>
+							{latitude, longitude, name, slots, payment, id, city, openingHour, 
+							closingHour, exit, walking, features : [{name, desc}, {name, desc}, ...} <br /><br />
+							
+							<ul>
+								<li> <span class="important">latitude, longitude : </span>position of the parking </li>
+								<li> <span class="important">name : </span>name of the parking </li>
+								<li> <span class="important">slots : </span>capacity of the parking</li>
+								<li> <span class="important">payment : </span>payment requirements of the parking </li>
+								<li> <span class="important">id : </span>id of the parking </li>
+								<li> <span class="important">city : </span>city in which the parking is located </li>
+								<li> <span class="important">entrance : </span>entrance address of the parking </li>
+								<li> <span class="important">exit : </span>exit address of the parking </li>
+								<li> <span class="important">walking : </span>walking address of the parking </li>
+								<li> <span class="important">openingHour : </span>opening hour of the parking </li>
+								<li> <span class="important">closingHour : </span>closing hour of the parking </li>
+								<li> <span class="important">features : </span>a list of features (composed of a name and a description) </li>							
+							</ul>
+						</td>
+						<td>
+							{"latitude":"60.4457044","longitude":"22.2443103", <br />
+							"name":"Parking #11", "slots":"Unknown","city":"Turku",<br />
+							"openingHour":"00:00:00", "closingHour":"23:59:59",<br />
+							"entrance":"Korkeavuorenkatu 2a, 20100, Turku ", <br />
+							"features":[{"type":"Heated","desc":"Lot is heated"}, <br />
+							{"type":"Roof","desc":"Lot has a roof"}],"payment":"Subject to a fee", <br />
+							"exit":"Korkeavuorenkatu 2a, 20100, Turku", <br />
+							"walking":"Korkeavuorenkatu 2a, 20100, Turku"} 
+						</td>
+					</tr>
+					<tr id="bloc3">
+						<td>GET api/api.php?request=feature/list </td>
+						<td>Returns a list of the features that are available to assign to a parking </td>
+						<td>
+							None
+						</td>
+						<td>
+							[{name}, {name}, ...]  <br /><br />
+							
+							<ul> <li> <span class="important">name : </span>the name of the feature </li></ul> 
+						</td>
+						<td>
+							["Heated","Roof","Surveillance"] 
+						</td>
+					</tr>
+					<tr id="bloc4">
+						<td>POST api/api.php?request=parking/add </td>
+						<td>Adds a new parking to the database </td>
+						<td>
+							POST parameters : <br /><br />
+							
+							<ul>
+								<li><span class="important">latitude : </span>latitude of the parking </li>
+								<li><span class="important">id : </span>id of the parking </li>
+								<li><span class="important">longitude : </span>longitude of the parking </li>
+								<li><span class="important">entrance : </span>entrance address of the parking </li>
+								<li><span class="important">exit : </span>exit address of the parking </li>
+								<li><span class="important">walking : </span>walking address of the parking </li>
+								<li><span class="important">openedFrom : </span>opening hour of the parking (HH:MM:SS) </li>
+								<li><span class="important">closedAt: </span>closing hour of the parking (HH:MM:SS) </li>
+								<li><span class="important">features : </span>a list of features  </li>
+								<li><span class="important">name : </span>name of the parking  </li>
+								<li><span class="important">slots : </span>capacity of the parking  </li>
+								<li><span class="important">payment : </span>payment requirements of the parking  </li>
+							</ul>
+						</td>
+						<td>
+							None
+						</td>
+						<td>
+							None
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<a href="#" > Back to top </a> <br /><br /><br />
+	</body>
+</html>

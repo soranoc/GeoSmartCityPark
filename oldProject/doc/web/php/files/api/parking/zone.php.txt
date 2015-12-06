@@ -1,0 +1,43 @@
+<?php
+	if (count($parameters) != 6)
+	   terminate("missing args");
+
+	// this regex is used to check that the parameters are valid coordinates
+	$regex = "/^\d+(\.\d+)?$/";
+
+	for ($i = 2; $i < 6; $i++) {
+	    if (!preg_match($regex, $parameters[$i]))
+	       terminate("invalid arg");
+	}
+
+	$db = connect();
+
+	$query = "SELECT DISTINCT GPSLatitude, GPSLongitude, Name, TotalSlotQty, OptionType, s.Segment 
+	       	 	 FROM segment AS s LEFT JOIN (payment_type as pt) 
+			 ON pt.Segment = s.Segment
+			 WHERE GPSLatitude >= :min_lat AND GPSLatitude <= :max_lat 
+			 AND GPSLongitude >= :min_long  AND GPSLongitude <= :max_long";
+			 
+	$sql = $db->prepare($query);
+
+	$sql->bindParam(":min_lat", $parameters[2], PDO::PARAM_STR, 10);
+	$sql->bindParam(":min_long", $parameters[3], PDO::PARAM_STR, 10);
+	$sql->bindParam(":max_lat", $parameters[4], PDO::PARAM_STR, 10);
+	$sql->bindParam(":max_long", $parameters[5], PDO::PARAM_STR, 10);
+
+	$sql->execute();
+	
+	while ($data = $sql->fetch()) {
+	      $lat = $data[0];
+	      $long = $data[1];
+	      $name = $data[2];
+	      $slots = $data[3];
+	      $payment = $data[4];
+	      $id = $data[5];
+
+	      $json[] = array('latitude' => $lat, 'longitude' => $long, 'name' => $name, 'slots' => $slots, 'payment' => $payment, 'id' => $id);
+	}
+
+	if (isset($json))
+	   echo json_encode($json);
+?>

@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>GeoSmartCity</title>
+    
+    <script src="libs/leaflet.js"></script>
+    <script src="libs/jquery-2.1.3.min.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/cilogi-marker.css" />
+    <script src="//cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+    <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/1.0.0-rc.4/esri-leaflet-geocoder.js"></script>
+    <script src="js/cilogi-marker.js"></script>
+    <link rel='stylesheet' href='css/iconic_stroke.css' type='text/css'/>
+    <link rel='stylesheet' href='css/font-awesome.css' type='text/css'/>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  
+  <body>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+	<span style="color: blue; font-weight: bold;"> Blue : Free of charge </span> <br /> 
+	<span style="color: red; font-weight: bold;"> Red : Subject to a fee </span>&nbsp; &nbsp;
+	<button id="input" type="button" class="btn btn-default ui-state-active">Add a marker</button> &nbsp; &nbsp;
+	<a href="http://amanda.dc.turkuamk.fi/~Bryan.Vergauwen/files/geosmartcity.sql" 
+	   download="http://amanda.dc.turkuamk.fi/~Bryan.Vergauwen/files/geosmartcity.sql"> SQL Dump file </a> 
+      </div>
+			
+      <div class="panel-body">  
+	<div class="row">
+	  <div class="col-xs-1 col-md-1" id="map"></div>
+	  
+	  <div class="col-xs-4 col-md-4" id="side_panel" > </div>
+	  
+	  <div class="col-xs-4 col-md-4" >
+	    <form class="form-horizontal text-left" name="form" method="post" id="input_form">
+	      <input type="hidden" id="latitude" name="latitude" />
+	      <input type="hidden" id="longitude" name="longitude" />
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="name">Name</label>
+		<div class="col-sm-6">
+		  <input type="text" class="form-control" id="name" name="name" />
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="maxCapacity"> Maximum capacity </label> 
+		<div class="col-sm-6">
+		  <input type="text" class="form-control" id="slots" name="slots" />
+		</div>
+	      </div> 
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="openedFrom" > Opened From
+		  <a href="#" data-toggle="tooltip" title="(HH:MM:SS)" >?</a>
+		</label>
+		<div class="col-sm-6">
+		  <input type="text" class="form-control" id="openedFrom" name="openedFrom" />
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="closedAt" > To
+		  <a href="#" data-toggle="tooltip" title="(HH:MM:SS)" >?</a>
+		</label>
+		<div class="col-sm-6">
+		  <input type="textarea" class="form-control" id="closedAt" name="closedAt" />
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="address" >Entrance Address </label>
+		<div class="col-sm-6">
+		  <input type="text" class="form-control" id="entrance" name="entrance" />
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="name">Exit address</label>
+		<div class="col-sm-6">
+		  <input type="text" class="form-control" id="exit" name="exit" />
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="name">Walking address</label>
+		<div class="col-sm-6">
+		  <input type="text" class="form-control" id="walking" name="walking" />
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="payment" > Payment type: </label>
+		<div class="col-sm-6">
+		  <select id="payment" name="payment" class="form-control">
+		    <option value="Free of charge">Free of charge</option>
+		    <option value="Subject to a fee">Subject to a fee</option>
+		  </select>
+		</div>
+	      </div>
+	      
+	      <div class="form-group">
+		<label class="col-sm-4 control-label col-md-offset-1" for="services" > Features
+		  <a href="#" data-toggle="tooltip" title="Hold Ctrl to select multiple features" >?</a>
+		</label>		
+		<div class="col-sm-6">
+		  <select multiple id="features" name="features" class="form-control">
+		  </select>
+		</div>
+		
+		<div class="form-group">
+		  <button type="submit" class="btn btn-default" id="input_submit"> Add this marker </button>
+		</div>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>

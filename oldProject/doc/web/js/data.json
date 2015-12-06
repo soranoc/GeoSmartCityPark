@@ -1,0 +1,187 @@
+{
+    "project": {},
+    "files": {
+        "js\\index.js": {
+            "name": "js\\index.js",
+            "modules": {},
+            "classes": {
+                "index": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "index": {
+            "name": "index",
+            "shortname": "index",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "js\\index.js",
+            "line": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "js\\index.js",
+            "line": 10,
+            "description": "Clear all markers on the map",
+            "itemtype": "method",
+            "name": "clearMarkers",
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 21,
+            "description": "Load markers on the map",
+            "itemtype": "method",
+            "name": "loadMarkers",
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 38,
+            "description": "Add a new marker",
+            "itemtype": "method",
+            "name": "addMarker",
+            "params": [
+                {
+                    "name": "infos",
+                    "description": "Informations of the marker",
+                    "type": "Object"
+                }
+            ],
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 71,
+            "description": "Add a temporary marker (green) when the user try to add a marker on the map",
+            "itemtype": "method",
+            "name": "addMarkerTmp",
+            "params": [
+                {
+                    "name": "lat",
+                    "description": "Latitude",
+                    "type": "Double"
+                },
+                {
+                    "name": "lng",
+                    "description": "Longitude",
+                    "type": "Double"
+                }
+            ],
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 93,
+            "description": "Update the 3 adresses input fields with the current location on the map",
+            "itemtype": "method",
+            "name": "updateAdress",
+            "params": [
+                {
+                    "name": "result",
+                    "description": "Result",
+                    "type": "Object"
+                }
+            ],
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 109,
+            "description": "Display details of a marker",
+            "itemtype": "method",
+            "name": "displayDetail",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "Id",
+                    "type": "Object"
+                }
+            ],
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 145,
+            "description": "Update latitude and longitude",
+            "itemtype": "method",
+            "name": "updatePosition",
+            "params": [
+                {
+                    "name": "lat",
+                    "description": "Latitude",
+                    "type": "Double"
+                },
+                {
+                    "name": "lng",
+                    "description": "Longitude",
+                    "type": "Double"
+                }
+            ],
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 158,
+            "description": "Toggle details",
+            "itemtype": "method",
+            "name": "toggleDetails",
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 167,
+            "description": "Invoked by clicking on the map",
+            "itemtype": "method",
+            "name": "onMapClick",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "Event",
+                    "type": "Object"
+                }
+            ],
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 188,
+            "description": "Do the ajax request for adding a parking",
+            "itemtype": "method",
+            "name": "addParking",
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 223,
+            "description": "Clear the input form",
+            "itemtype": "method",
+            "name": "clearForm",
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 239,
+            "description": "Change the cursor (crosshair/pointer)",
+            "itemtype": "method",
+            "name": "changeCursor",
+            "class": "index"
+        },
+        {
+            "file": "js\\index.js",
+            "line": 251,
+            "description": "Open a popup to authentify the user",
+            "itemtype": "method",
+            "name": "openPopup",
+            "class": "index"
+        }
+    ],
+    "warnings": []
+}
